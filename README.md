@@ -400,30 +400,6 @@ supabase db push
 
 ---
 
-## 🆘 Support
-
-### Problèmes Courants
-
-#### 1. Erreur CORS
-**Symptôme** : Erreur CORS lors des appels API
-**Solution** : Vérifier que les Edge Functions sont déployées et que les secrets sont configurés
-
-#### 2. Chatbot ne répond pas
-**Symptôme** : "Mode démo" affiché
-**Solution** : 
-```bash
-supabase secrets set OPENAI_API_KEY=votre_cle
-supabase functions deploy chat-module
-```
-
-#### 3. Authentification échoue
-**Symptôme** : Impossible de se connecter
-**Solution** : Vérifier les variables d'environnement Supabase
-
-#### 4. Données ne se sauvegardent pas
-**Symptôme** : Les analyses disparaissent
-**Solution** : Vérifier les politiques RLS dans Supabase
-
 ### Logs et Debugging
 ```bash
 # Logs des Edge Functions
@@ -436,13 +412,6 @@ supabase logs db
 npm run dev
 # Ouvrir F12 > Console pour voir les erreurs
 ```
-
-### Contact
-- **Développement** : [Votre équipe dev]
-- **Support technique** : [Votre support]
-- **Documentation** : Ce README
-
----
 
 ## 📚 Ressources
 
@@ -459,4 +428,4 @@ npm run dev
 
 ---
 
-*Dernière mise à jour : Décembre 2024*
+*Dernière mise à jour : septembre 2025*
