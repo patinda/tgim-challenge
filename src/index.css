@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegistics;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 0 36% 36%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 0 36% 36%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 36% 36%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 0 36% 36%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Masquer la barre de défilement tout en conservant la fonctionnalité */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  /* Pour Firefox */
+  * {
+    scrollbar-width: none;
+  }
+
+  /* Pour IE et Edge */
+  -ms-overflow-style: none;
+}
+
+/* Classe utilitaire pour masquer les barres de défilement */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Styles du calendrier */
+.calendar-grid {
+  @apply bg-card;
+}
+
+.calendar-cell {
+  @apply relative min-h-[100px] p-2 transition-colors bg-card border-border border-t border-r;
+}
+
+/* Enlever la bordure droite pour la dernière colonne */
+.calendar-cell:nth-child(7n) {
+  @apply border-r-0;
+}
+
+.calendar-cell:not(.past-day):hover {
+  @apply bg-accent/50;
+}
+
+.calendar-cell.other-month {
+  @apply bg-muted/10 text-muted-foreground;
+}
+
+.calendar-cell.past-day {
+  @apply bg-muted/5 text-muted-foreground;
+}
+
+.calendar-cell.today {
+  @apply bg-primary/5;
+}
+
+.calendar-cell.today .date-indicator {
+  @apply bg-primary text-primary-foreground;
+}
+
+.calendar-header {
+  @apply bg-card border-b border-border;
+}
+
+.calendar-event {
+  @apply text-xs rounded transition-all;
+  margin-bottom: 2px;
+  background-color: rgba(var(--event-color), 0.08);
+  color: rgb(var(--event-color));
+}
+
+.dark .calendar-event {
+  background-color: rgba(var(--event-color), 0.15);
+  color: hsl(0 0% 98%);
+}
+
+.calendar-event.past-event {
+  opacity: 0.4;
+}
+
+.calendar-event-content {
+  @apply flex items-center justify-between gap-2;
+}
+
+.calendar-event-title {
+  @apply truncate;
+  color: inherit;
+}
+
+.calendar-event-time {
+  @apply text-inherit opacity-90;
+}
+
+.calendar-event-actions {
+  @apply opacity-0 group-hover:opacity-100 transition-opacity;
+}
+
+.calendar-event-popover {
+  @apply p-2 space-y-1;
+}
+
+.calendar-event-popover-header {
+  @apply flex items-center justify-between mb-2;
+}
+
+.calendar-event-popover-title {
+  @apply font-medium text-card-foreground;
+}
+
+.calendar-event-popover-time {
+  @apply text-sm text-muted-foreground;
+}
+
+/* Animation de mise en évidence */
+@keyframes highlight {
+  0% {
+    background-color: hsl(var(--primary) / 0.2);
+    transform: scale(1);
+  }
+  50% {
+    background-color: hsl(var(--primary) / 0.1);
+    transform: scale(1.02);
+  }
+  100% {
+    background-color: transparent;
+    transform: scale(1);
+  }
+}
+
+.highlight-animation {
+  animation: highlight 2s ease-out forwards;
+}
+
+/* Styles personnalisés pour la sidebar */
+.sidebar-nav-item {
+  @apply flex items-center w-full px-3 py-2 rounded-md transition-colors;
+  @apply text-muted-foreground hover:text-foreground hover:bg-accent/50;
+}
+
+.sidebar-nav-item.active {
+  @apply bg-primary/10 text-primary font-medium;
+}
+
+.sidebar-nav-item-icon {
+  @apply h-4 w-4 mr-3 flex-shrink-0;
+}
+
+.sidebar-nav-item-content {
+  @apply flex-1 flex items-center justify-between;
+}
+
+.sidebar-nav-item-badge {
+  @apply ml-auto text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary;
+}
+
+.sidebar-section-title {
+  @apply text-xs font-medium text-muted-foreground px-3 py-2 uppercase tracking-wider;
+}
+
+/* Styles pour le header */
+.header-search {
+  @apply relative flex-1 max-w-md;
+}
+
+.header-search-input {
+  @apply w-full pl-9 pr-4 py-2 text-sm rounded-lg;
+  @apply bg-muted/50 border-none focus-visible:ring-primary/20;
+  @apply placeholder:text-muted-foreground;
+}
+
+.header-search-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground;
+}
+
+.header-avatar {
+  @apply h-8 w-8 rounded-full ring-2 ring-primary/20 transition-all duration-300;
+  @apply hover:ring-primary/40;
+}
+
+.header-title {
+  @apply text-lg font-semibold;
+}
+
+.header-live-event {
+  @apply bg-emerald-500 hover:bg-emerald-600 text-white;
+  @apply flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium;
+  @apply transition-all duration-300 hover:shadow-md;
+}

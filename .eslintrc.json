@@ -1,0 +1,27 @@
+{
+  "extends": ["@eslint/js"],
+  "plugins": {
+    "@typescript-eslint": "@typescript-eslint/plugin"
+  },
+  "languageOptions": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": true,
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    }
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { 
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^_" 
+    }]
+  },
+  "ignores": ["dist/**", "node_modules/**"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+dist/
+*.env
+*.env.local
+*.env.production
+deploy-*.sh
+node_modules/
+.DS_Store
+*.log
